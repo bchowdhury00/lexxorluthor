@@ -145,12 +145,16 @@ void my_main() {
 	break;
 	
       case TORUS:
-	add_torus(tmp,op[i].op.torus.d[0],op[i].op.torus.d[1],op[i].op.torus.d[2], op[i].op.torus.r0,op[i].op.torus.r1, step_3d);
+	add_torus(tmp,
+		  op[i].op.torus.d[0],
+		  op[i].op.torus.d[1],
+		  op[i].op.torus.d[2],
+		  op[i].op.torus.r0,
+		  op[i].op.torus.r1,
+		  step_3d);
 	matrix_mult(peek(systems), tmp);
 	if (op[i].op.torus.constants != NULL){
-	  printf("%s\n",op[i].op.torus.constants->name);
-	  print_constants(lookup_symbol(op[i].op.torus.constants->name)->s.c);
-	  draw_polygons(tmp, t, zb, view, light, ambient,lookup_symbol(op[i].op.torus.constants->name)->s.c);
+	  draw_polygons(tmp, t, zb, view, light, ambient,op[i].op.torus.constants->s.c);
 	}
 	else{
 	  draw_polygons(tmp, t, zb, view, light, ambient, reflect);
